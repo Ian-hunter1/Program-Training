@@ -25,8 +25,8 @@ public class Drivetrain extends Subsystem {
     
     public static DifferentialDrive drivetrain = new DifferentialDrive(driveControllersLeft, driveControllersRight);
     public static Solenoid shiftingPiston = new Solenoid(RobotMap.SHIFTING_PISTON);
-    public void initDefaultCommand() {
-        
+    
+    public Drivetrain() {     
     }
     public void stop() {
 		drivetrain.arcadeDrive(0.0,0.0);
@@ -43,5 +43,6 @@ public class Drivetrain extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new DrivetrainDriveWithJoystick());
+	}
 }
 
