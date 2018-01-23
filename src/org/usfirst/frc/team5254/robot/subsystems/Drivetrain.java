@@ -1,9 +1,14 @@
 package org.usfirst.frc.team5254.robot.subsystems;
 
 import org.usfirst.frc.team5254.robot.RobotMap;
+import org.usfirst.frc.team5254.robot.commands.DrivetrainDriveWithJoystick;
 
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  *
@@ -18,9 +23,25 @@ public class Drivetrain extends Subsystem {
     public static Victor driveControllerRight2 = new Victor(RobotMap.DRIVETRAIN_RIGHT2);
     public static SpeedControllerGroup driveControllersRight = new SpeedControllerGroup(driveControllerRight1, driveControllerRight2);
     
-    public static DifferentialDrive drivetrain = new
+    public static DifferentialDrive drivetrain = new DifferentialDrive(driveControllersLeft, driveControllersRight);
+    public static Solenoid shiftingPiston = new Solenoid(RobotMap.SHIFTING_PISTON);
     public void initDefaultCommand() {
         
     }
+    public void stop() {
+		drivetrain.arcadeDrive(0.0,0.0);
+	}
+	public void shiftDown() {
+		shiftingPiston.set(true);
+	}
+	public void shiftUp() {
+		shiftingPiston.set(false);
+	}
+	public void slowTurn(double Throttle, double Turn) {
+		drivetrain.arcadeDrive(Throttle, 0.5 * Turn);
+	}
+	@Override
+	protected void initDefaultCommand() {
+		setDefaultCommand(new DrivetrainDriveWithJoystick());
 }
 
