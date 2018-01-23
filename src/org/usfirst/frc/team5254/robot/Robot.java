@@ -9,8 +9,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5254.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.IterativeRobot;
 
-public class Robot extends TimedRobot {
+public class Robot extends IterativeRobot {
 	
 	static Timer timer = new Timer();
 	
@@ -41,14 +42,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
 		}
-	}
-
-	/**
-	 * This function is called periodically during autonomous.
-	 */
+	
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
@@ -56,18 +51,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
+		
 		}
-	}
-
-	/**
-	 * This function is called periodically during operator control.
-	 */
+	
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
