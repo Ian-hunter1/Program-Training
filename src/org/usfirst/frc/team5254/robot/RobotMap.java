@@ -9,5 +9,12 @@ package org.usfirst.frc.team5254.robot;
  * floating around.
  */
 public class RobotMap {
-	public static final int
+	public static final int DRIVETRAIN_LEFT = 0;
+	public static final int DRIVETRAIN_LEFT2 = 1;
+	public static final int	DRIVETRAIN_RIGHT = 2;
+	public static final int DRIVETRAIN_RIGHT2 = 3;
+	
+	public static final int DRIVER_JOYSTICK = 0;
+	public static final int OPERATOR_JOYSTICK = 1;
+	
 }
