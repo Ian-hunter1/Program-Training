@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DrivetrainSlowTurn extends Command {
 
     public DrivetrainSlowTurn() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    	requires(Robot.Drivetrain);
     }
 
     // Called just before this Command runs the first time
