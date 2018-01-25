@@ -1,10 +1,10 @@
 package org.usfirst.frc.team5254.robot.commands;
 
+import org.usfirst.frc.team5254.robot.Robot;
+import org.usfirst.frc.team5254.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class DrivetrainSlowTurn extends Command {
 
     public DrivetrainSlowTurn() {
@@ -18,6 +18,8 @@ public class DrivetrainSlowTurn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.Drivetrain.slowTurn(Robot.oi.driverJoystick.getRawAxis(RobotMap.DRIVER_THROTTLE_AXIS),
+    			Robot.oi.driverJoystick.getRawAxis(RobotMap.DRIVER_TURN_AXIS));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,5 +34,6 @@ public class DrivetrainSlowTurn extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
