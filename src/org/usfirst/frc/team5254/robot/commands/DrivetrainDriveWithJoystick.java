@@ -1,12 +1,9 @@
 package org.usfirst.frc.team5254.robot.commands;
 
 import org.usfirst.frc.team5254.robot.Robot;
-
+import org.usfirst.frc.team5254.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class DrivetrainDriveWithJoystick extends Command {
 
     public DrivetrainDriveWithJoystick() {
@@ -22,6 +19,8 @@ public class DrivetrainDriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.Drivetrain.drive(Robot.oi.driverJoystick.getRawAxis(RobotMap.DRIVER_THROTTLE_AXIS),
+    			Robot.oi.driverJoystick.getRawAxis(RobotMap.DRIVER_TURN_AXIS));
     }
 
     // Make this return true when this Command no longer needs to run execute()

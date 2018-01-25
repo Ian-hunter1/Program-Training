@@ -40,6 +40,11 @@ public class Drivetrain extends Subsystem {
 	public void slowTurn(double Throttle, double Turn) {
 		drivetrain.arcadeDrive(Throttle, 0.5 * Turn);
 	}
+	
+	public void drive(double Throttle,double Turn) {
+		drivetrain.arcadeDrive(Throttle, -Turn);
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new DrivetrainDriveWithJoystick());
