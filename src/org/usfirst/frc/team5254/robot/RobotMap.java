@@ -15,7 +15,8 @@ public class RobotMap {
 	public static final int DRIVETRAIN_LEFT2 = 1;
 	public static final int	DRIVETRAIN_RIGHT = 2;
 	public static final int DRIVETRAIN_RIGHT2 = 3;
-	public static final int CUBE_MECH_LEFT = 
+	public static final int CUBE_MECH_LEFT = 4;
+	public static final int CUBE_MECH_RIGHT = 5;
 	
 	//Joysticks
 	public static final int DRIVER_JOYSTICK = 0;
