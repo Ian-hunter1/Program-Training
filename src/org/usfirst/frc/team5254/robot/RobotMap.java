@@ -9,17 +9,27 @@ package org.usfirst.frc.team5254.robot;
  * floating around.
  */
 public class RobotMap {
+	
+	//Motor Encoders
 	public static final int DRIVETRAIN_LEFT = 0;
 	public static final int DRIVETRAIN_LEFT2 = 1;
 	public static final int	DRIVETRAIN_RIGHT = 2;
 	public static final int DRIVETRAIN_RIGHT2 = 3;
+	public static final int CUBE_MECH_LEFT = 
 	
+	//Joysticks
 	public static final int DRIVER_JOYSTICK = 0;
 	public static final int OPERATOR_JOYSTICK = 1;
 	
+	//axis
 	public static final int DRIVER_THROTTLE_AXIS = 1;
 	public static final int DRIVER_TURN_AXIS = 4;
 	public static final int OPERATOR_SLIDING_AXIS = 5;
 	
+	
+	//pistons
 	public static final int SHIFTING_PISTON = 0;
+	public static final int CUBE_MECH_ARMS = 1;
+	public static final int CUBE_MECH_HINGE_UP = 2;
+	public static final int CUBE_MECH_HINGE_DOWN = 3;
 }
