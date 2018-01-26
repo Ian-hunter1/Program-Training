@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5254.robot.subsystems;
 
 import org.usfirst.frc.team5254.robot.RobotMap;
-
+import org.usfirst.frc.team5254.robot.commands.CubeMechStopFlywheels;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -37,8 +37,7 @@ public class CubeMech extends Subsystem {
 		cubeMechRightFlywheels.set(0);
 	}
     public void initDefaultCommand() {
-    	
-    	
+    	setDefaultCommand(new CubeMechStopFlywheels());
     }
 }
 
