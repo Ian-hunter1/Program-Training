@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team5254.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import org.usfirst.frc.team5254.robot.subsystems.CubeMech;
+import org.usfirst.frc.team5254.robot.subsystems.Elevator;
 
 public class Robot extends IterativeRobot {
 	
@@ -18,6 +19,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain Drivetrain = new Drivetrain();
 	public static CubeMech CubeMech = new CubeMech();
+	public static Elevator Elevator = new Elevator();
 	
 	@Override
 	public void robotInit() {
