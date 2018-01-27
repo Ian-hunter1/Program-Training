@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CubeMechOutake extends Command {
+public class CubeMechArmsUp extends Command {
 
-    public CubeMechOutake() {
+    public CubeMechArmsUp() {
         requires(Robot.CubeMech);
     }
 
@@ -19,7 +19,7 @@ public class CubeMechOutake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.CubeMech.Outake();
+    	Robot.CubeMech.ArmsUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
