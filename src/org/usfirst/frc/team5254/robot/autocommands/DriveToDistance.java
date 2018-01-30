@@ -1,19 +1,25 @@
 package org.usfirst.frc.team5254.robot.autocommands;
 
+import org.usfirst.frc.team5254.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class DriveToDistance extends Command {
-
-    public DriveToDistance() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+	
+	double Throttle;
+	double Distance;
+	
+    public DriveToDistance(double Throttle, double Turn) {
+        this.Throttle = Throttle;
+        this.Distance = Distance;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.Drivetrain.autoDistanceDriveInIt(Throttle, Distance);
     }
 
     // Called repeatedly when this Command is scheduled to run
