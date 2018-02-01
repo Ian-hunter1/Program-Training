@@ -3,16 +3,16 @@ package org.usfirst.frc.team5254.robot.subsystems;
 import org.usfirst.frc.team5254.robot.RobotMap;
 import org.usfirst.frc.team5254.robot.commands.DrivetrainDriveWithJoystick;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-/**
- *
- */
 public class Drivetrain extends Subsystem {
 	
 	//spark encoders
@@ -30,9 +30,22 @@ public class Drivetrain extends Subsystem {
     
     //pistons
     public static Solenoid shiftingPiston = new Solenoid(RobotMap.SHIFTING_PISTON);
-    
+    // auto Controllers
+    public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+    public static Encoder encoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+    public static Timer timer = new Timer();
+    //auto variables
+    double angle;
+    private static int finalTicks;
+    private int remainingTicks;
+    private double remainingDistance;
+    private double Throttle;
+    private double finalThrottle;
     //calling commands
-    public Drivetrain() {     
+    public Drivetrain() {  
+    	super("Drivetrain", RobotMap.TURN_P, RobotMap.TURN_I, RobotMap.TURN_D);
+    	setAbsoluteTolerance(3.0);
+    	getPIDController().setContius(true);
     }
     public void stop() {
 		drivetrain.arcadeDrive(0.0,0.0);
@@ -50,7 +63,30 @@ public class Drivetrain extends Subsystem {
 	public void drive(double Throttle,double Turn) {
 		drivetrain.arcadeDrive(Throttle, -Turn);
 	}
-	
+	//auto methods
+	public void initEncoder(boolean direction) {
+		encoder.reset();
+		encoder.setMaxPeriod(0.1);
+		encoder.setMinRate(1);
+		encoder.setDistancePerPulse(1);
+		encoder.setReverseDirection(direction);
+		encoder.setSamplesToAverage(7);
+	}
+	public void autoDriveToDistanceInIt(double Throttle, double Distance) {
+		this.Throttle = Throttle;
+		finalTicks = (int) ((distance / (RobotMap.DRIVETRAIN_WHEEL_DIAMETER * Math.PI)) * RobotMap.ENCODER_TICKS * RobotMap.DRIVETRAIN_GEAR_RATIO); 
+		if (Throttle > 0) {
+			initEncoder(true);
+		} else {
+			initEncoder(false);
+		}
+		gyro.reset();
+		timer.reset();
+		timer.start();
+	}
+	public void autoDriveToDistance() {
+		remainingTicks = Math.abs(finalTicks) - Math.abs(Encoder.get());
+	}
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new DrivetrainDriveWithJoystick());
