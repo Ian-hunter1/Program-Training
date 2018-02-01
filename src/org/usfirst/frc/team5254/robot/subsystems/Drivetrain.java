@@ -10,10 +10,11 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-public class Drivetrain extends Subsystem {
+public class Drivetrain extends PIDSubsystem {
 	
 	//spark encoders
 	public static Spark driveControllerLeft1 = new Spark(RobotMap.DRIVETRAIN_LEFT);
@@ -45,7 +46,7 @@ public class Drivetrain extends Subsystem {
     public Drivetrain() {  
     	super("DriveTrain", RobotMap.TURN_P, RobotMap.TURN_I, RobotMap.TURN_D);
     	setAbsoluteTolerance(3.0);
-    	getPIDController().setContius(true);
+    	getPIDController().setContinuous(true);
     }
     public void stop() {
 		drivetrain.arcadeDrive(0.0,0.0);
@@ -85,7 +86,7 @@ public class Drivetrain extends Subsystem {
 		timer.start();
 	}
 	public void autoDriveToDistance() {
-		remainingTicks = Math.abs(finalTicks) - Math.abs(Encoder.get());
+		remainingTicks = Math.abs(finalTicks) - Math.abs(encoder.get());
 		remainingDistance = (Math.abs(remainingTicks) / (RobotMap.ENCODER_TICKS * RobotMap.DRIVETRAIN_GEAR_RATIO))
 				* (RobotMap.DRIVETRAIN_WHEEL_DIAMETER * Math.PI);
 		
@@ -145,4 +146,3 @@ public class Drivetrain extends Subsystem {
 		setDefaultCommand(new DrivetrainDriveWithJoystick());
 	}
 }
-
