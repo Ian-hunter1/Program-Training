@@ -1,13 +1,5 @@
-
-
 package org.usfirst.frc.team5254.robot;
 
-/**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
- */
 public class RobotMap {
 	
 	//Motor Controllers
@@ -34,4 +26,17 @@ public class RobotMap {
 	public static final int CUBE_MECH_ARMS = 1;
 	public static final int CUBE_MECH_HINGE_UP = 2;
 	public static final int CUBE_MECH_HINGE_DOWN = 3;
+	
+	//Misc
+	public static final double DRIVETRAIN_GEAR_RATIO = ((25.0 / 6.0) * (100.0 / 91.0));
+	public static final int DRIVETRAIN_WHEEL_DIAMETER = 6;
+	
+	public static final int ELEVATOR_GEAR_RATIO = 1;
+	public static final int ELEVATOR_AXIS_DIAMETER = 1;
+	public static final int ENCODER_TICKS = 256;
+	
+	public static final double Kp = 0.3;
+	public static final double TURN_P = 0.02;
+	public static final double TURN_I = 0.002;
+	public static final double TURN_D = 0.2;
 }

@@ -43,7 +43,7 @@ public class Drivetrain extends Subsystem {
     private double finalThrottle;
     //calling commands
     public Drivetrain() {  
-    	super("Drivetrain", RobotMap.TURN_P, RobotMap.TURN_I, RobotMap.TURN_D);
+    	super("DriveTrain", RobotMap.TURN_P, RobotMap.TURN_I, RobotMap.TURN_D);
     	setAbsoluteTolerance(3.0);
     	getPIDController().setContius(true);
     }
@@ -87,7 +87,7 @@ public class Drivetrain extends Subsystem {
 	public void autoDriveToDistance() {
 		remainingTicks = Math.abs(finalTicks) - Math.abs(Encoder.get());
 		remainingDistance = (Math.abs(remainingTicks) / (RobotMap.ENCODER_TICKS * RobotMap.DRIVETRAIN_GEAR_RATIO))
-				* (DRIVTRAIN_WHEEL_DIAMETER * Math.PI);
+				* (RobotMap.DRIVETRAIN_WHEEL_DIAMETER * Math.PI);
 		
 		if (Throttle > 0) {
 			if (remainingDistance < Throttle * 15) {
@@ -119,9 +119,10 @@ public class Drivetrain extends Subsystem {
 				finalThrottle = -0.35;
 			}
 		}
-		drive(-finalThrottle, -gyro.getAngle(), * RobotMap.Kp);
+		drive(-finalThrottle, -gyro.getAngle() * RobotMap.Kp);
 		System.out.println(gyro.getAngle() + " " + Throttle + " " + remainingDistance 
 				+ " " + finalThrottle + " " + encoder.get() + " " + remainingTicks);
+		}
 	}
 	public boolean driveAutoIsFinished() {
 		return remainingTicks < 21;
