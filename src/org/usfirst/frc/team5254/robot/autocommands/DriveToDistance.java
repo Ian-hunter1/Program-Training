@@ -4,9 +4,6 @@ import org.usfirst.frc.team5254.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class DriveToDistance extends Command {
 	
 	double Throttle;

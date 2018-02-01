@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5254.robot.subsystems;
 
+import org.usfirst.frc.team5254.robot.Robot;
 import org.usfirst.frc.team5254.robot.RobotMap;
 import org.usfirst.frc.team5254.robot.commands.DrivetrainDriveWithJoystick;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -74,7 +74,7 @@ public class Drivetrain extends Subsystem {
 	}
 	public void autoDriveToDistanceInIt(double Throttle, double Distance) {
 		this.Throttle = Throttle;
-		finalTicks = (int) ((distance / (RobotMap.DRIVETRAIN_WHEEL_DIAMETER * Math.PI)) * RobotMap.ENCODER_TICKS * RobotMap.DRIVETRAIN_GEAR_RATIO); 
+		finalTicks = (int) ((Distance / (RobotMap.DRIVETRAIN_WHEEL_DIAMETER * Math.PI)) * RobotMap.ENCODER_TICKS * RobotMap.DRIVETRAIN_GEAR_RATIO); 
 		if (Throttle > 0) {
 			initEncoder(true);
 		} else {
@@ -86,6 +86,58 @@ public class Drivetrain extends Subsystem {
 	}
 	public void autoDriveToDistance() {
 		remainingTicks = Math.abs(finalTicks) - Math.abs(Encoder.get());
+		remainingDistance = (Math.abs(remainingTicks) / (RobotMap.ENCODER_TICKS * RobotMap.DRIVETRAIN_GEAR_RATIO))
+				* (DRIVTRAIN_WHEEL_DIAMETER * Math.PI);
+		
+		if (Throttle > 0) {
+			if (remainingDistance < Throttle * 15) {
+				finalThrottle = remainingDistance / 15;
+			} else {
+				finalThrottle = Throttle;
+			}
+			if (timer.get() < 0.25 && remainingDistance > 10.0); {
+				finalThrottle = timer.get() * 4;
+			}
+			if (finalThrottle > Throttle) {
+				finalThrottle = Throttle;
+			}
+			if (finalThrottle < 0.35) {
+				finalThrottle = 0.35;
+			} else {
+				if (remainingDistance < Math.abs(Throttle) * 15) {
+					finalThrottle = -remainingDistance / 15;
+			} else {
+				finalThrottle = Throttle;
+			}
+			if (timer.get() < 0.25 && remainingDistance > 10.0); {
+				finalThrottle = -timer.get() * 4;
+			}
+			if (finalThrottle < Throttle) {
+				finalThrottle = Throttle;
+			}
+			if (finalThrottle > -0.35) {
+				finalThrottle = -0.35;
+			}
+		}
+		drive(-finalThrottle, -gyro.getAngle(), * RobotMap.Kp);
+		System.out.println(gyro.getAngle() + " " + Throttle + " " + remainingDistance 
+				+ " " + finalThrottle + " " + encoder.get() + " " + remainingTicks);
+	}
+	public boolean driveAutoIsFinished() {
+		return remainingTicks < 21;
+	}
+	public void autoDriveToDistanceFast() {
+		remainingTicks = Math.abs(finalTicks) - Math.abs(encoder.get());
+	}
+	public void PIDTurnInit() {
+		Robot.Drivetrain.setSetpoint(gyro.getAngle() + this.angle);
+		Robot.Drivetrain.enable();
+	}
+	protected double returnPIDInput() {
+		return gyro.getAngle();
+	}
+	protected void usePIDOutput(double output) {
+		drive(0.0, output);
 	}
 	@Override
 	protected void initDefaultCommand() {
