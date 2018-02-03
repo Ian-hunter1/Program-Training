@@ -9,7 +9,7 @@ public class DriveToDistance extends Command {
 	double Throttle;
 	double Distance;
 	
-    public DriveToDistance(double Throttle, double Turn) {
+    public DriveToDistance(double Throttle, double Distance) {
         this.Throttle = Throttle;
         this.Distance = Distance;
     }
