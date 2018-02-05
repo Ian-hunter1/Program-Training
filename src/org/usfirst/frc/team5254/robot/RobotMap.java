@@ -1,5 +1,5 @@
 package org.usfirst.frc.team5254.robot;
-
+public static final int
 public class RobotMap {
 	
 	//Motor Controllers
